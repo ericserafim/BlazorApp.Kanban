@@ -1,0 +1,11 @@
+﻿@using BlazorApp.Kanban.Models
+
+<div class="alert @(Item.IsDone ? "alert-secondary" : "alert-primary")" role="alert">
+    <input type="checkbox" @bind="Item.IsDone" />
+    @Item.Title
+</div>
+
+@code {
+    [Parameter]
+    public TodoItem Item { get; set; }
+}

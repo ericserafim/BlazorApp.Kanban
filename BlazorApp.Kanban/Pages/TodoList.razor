@@ -1,0 +1,37 @@
+﻿@using BlazorApp.Kanban.Models
+
+<h1>@Title</h1>
+
+<input placeholder="Something todo" @bind="newTodo" />
+<button @onclick="AddTodo">Add todo</button>
+<p/>
+
+@if (!todoList.Any())
+{
+    <p><em>:) There are no items to complete</em></p>
+}
+else
+{
+    @foreach (var todoItem in todoList)
+    {
+        <Todo Item="todoItem" />
+    }
+}
+
+@code {
+
+  [Parameter]
+  public string Title { get; set; }
+
+  private IList<TodoItem> todoList = new List<TodoItem>();
+  private string newTodo;
+
+  private void AddTodo()
+  {
+      if (!string.IsNullOrWhiteSpace(newTodo))
+      {
+          todoList.Add(new TodoItem { Title = newTodo });
+          newTodo = string.Empty;
+      }
+  }
+}
